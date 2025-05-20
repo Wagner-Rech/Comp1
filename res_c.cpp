@@ -1,13 +1,54 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+vector<set<int>> chefe;
+
+void cadeia(int i, int x) {
+	if (chefe[x].empty()) {}
+	else {
+		for (auto y: chefe[x]) {
+		chefe[i].insert(y);
+		cadeia(i,y);
+		}
+	}
+}
+
 int main() {
+	vector<int> conv_tot;
 	int total,convidados;
 	cin >> total >> convidados;
-	int hierarquia[n+1];
-	vector<set<int>> chefe(n);
-	for (int i = 2; i <= n; i++) {
-		cin >> chefe(i).insert();
+	int hierarquia[total+1];
+	for (int i = 1; i <= total + 1; i++) {
+		hierarquia[i] = 0;
 	}
+	chefe.resize(total);
+	for (int i = 2; i <= total; i++) {
+		int n;
+		cin >> n;
+		chefe[i].insert(n);
+		hierarquia[i] = hierarquia[n] + 1;
+		cadeia(i,n);
+	}
+	for (int i = 0; i < convidados / 2; i++) {
+		int a,b, menor,novo;
+		menor = total;
+		cin >> a >> b;
+		for (auto c: chefe[a]){
+			for (auto d: chefe[b]){
+				if (c == d || hierarquia[c] < menor) {
+					menor = hierarquia[c];
+					novo = c;
+				}
+			}
+		}
+		conv_tot.push_back(a);
+		conv_tot.push_back(b);
+		conv_tot.push_back(novo);
+	}
+	for (auto z: conv_tot) {
+		cout << z << " ";
+	}
+	cout << endl;
+
 	return 0;
 }
