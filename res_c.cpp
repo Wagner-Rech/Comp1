@@ -4,7 +4,8 @@ using namespace std;
 vector<set<int>> chefe;
 
 void cadeia(int i, int x) {
-	if (chefe[x].empty()) {}
+	if (chefe[x].empty()) {
+	}
 	else {
 		for (auto y: chefe[x]) {
 		chefe[i].insert(y);
@@ -21,7 +22,7 @@ int main() {
 	for (int i = 1; i <= total + 1; i++) {
 		hierarquia[i] = 0;
 	}
-	chefe.resize(total);
+	chefe.resize(total + 1);
 	for (int i = 2; i <= total; i++) {
 		int n;
 		cin >> n;
@@ -31,11 +32,11 @@ int main() {
 	}
 	for (int i = 0; i < convidados / 2; i++) {
 		int a,b, menor,novo;
-		menor = total;
+		menor = 0;
 		cin >> a >> b;
 		for (auto c: chefe[a]){
 			for (auto d: chefe[b]){
-				if (c == d || hierarquia[c] < menor) {
+				if (c == d & hierarquia[c] > menor & c != a & c != b) {
 					menor = hierarquia[c];
 					novo = c;
 				}
