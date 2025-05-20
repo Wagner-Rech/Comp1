@@ -32,7 +32,8 @@ int main() {
 	}
 	for (int i = 0; i < convidados / 2; i++) {
 		int a,b, menor,novo;
-		menor = 0;
+		menor = -1;
+		novo = -1;
 		cin >> a >> b;
 		for (auto c: chefe[a]){
 			for (auto d: chefe[b]){
@@ -45,6 +46,19 @@ int main() {
 		conv_tot.push_back(a);
 		conv_tot.push_back(b);
 		conv_tot.push_back(novo);
+	}
+	for (int i = 0; i < conv_tot.size(); i++) {
+		int ind,num;
+		ind = i;
+		num = conv_tot[i];
+		for (int o = i; o < conv_tot.size(); o++) {
+			if (conv_tot[o] < num) {
+			num = conv_tot[o];
+			ind = o;
+			}
+		}
+		conv_tot.erase(conv_tot.begin()+ind);
+		conv_tot.insert(conv_tot.begin()+i,num);
 	}
 	for (auto z: conv_tot) {
 		cout << z << " ";
